@@ -40,7 +40,7 @@ private const val configurationId: String = "main_json"
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 @Testcontainers
 @DisplayName("Aws AppConfig Agent response spec")
-class AwsAppConfigResponseSpec(
+class AwsAppConfigAgentResponseSpec(
     @Autowired
     val config: ApplicationScopeConfig
 ) {
