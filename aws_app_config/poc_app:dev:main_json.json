@@ -1,0 +1,16 @@
+{
+  "featureA": {
+    "enabled": true
+  },
+  "featureB": {
+    "enabled": false
+  },
+  "featureC": true,
+  "Welcome": {
+    "msg": "hello!"
+  },
+  "Maintenance": {
+    "flag": false,
+    "msg": "I'm sorry"
+  }
+}

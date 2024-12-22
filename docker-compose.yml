@@ -1,0 +1,20 @@
+services:
+  app:
+    image: amazoncorretto:17
+    volumes:
+      - .:/app
+      - .container_cache/root/.gradle:/root/.gradle
+    working_dir: /app
+    command: ./gradlew bootRun --args='--spring.profiles.active=dev'
+    ports:
+      - 8080:8080
+  aws-app-config-agent:
+    # https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-ec2.html
+    image: public.ecr.aws/aws-appconfig/aws-appconfig-agent:2.0.13147
+    environment:
+      LOG_LEVEL: debug
+      AWS_REGION: ${AWS_REGION:-ap-northeast-1}
+    volumes:
+      - ./aws_app_config:/tmp/aws_app_config
+    ports:
+      - 2772:2772

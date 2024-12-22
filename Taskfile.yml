@@ -1,0 +1,47 @@
+version: 3
+
+vars:
+  COMPOSE_FILE_LOCAL: docker-compose.yml:docker-compose.override.local.yml
+  COMPOSE_FILE_AWS: docker-compose.yml:docker-compose.override.aws.yml
+
+tasks:
+  down:
+    cmd: docker compose down -v
+  up:local:
+    env:
+      COMPOSE_FILE: "{{.COMPOSE_FILE_LOCAL}}"
+    cmd: docker compose up
+  up:aws:
+    env:
+      COMPOSE_FILE: "{{.COMPOSE_FILE_AWS}}"
+    cmd: docker compose up
+  test:
+    cmd: ./gradlew test
+  watch:config_update_on_request_scope:
+    cmd: |
+      watch -n1 curl http://localhost:8080/config-update-on-request-scope
+  watch:config_update_on_application_scope:
+    cmd: |
+      watch -n1 curl http://localhost:8080/config-update-on-application-scope
+  watch:updated:
+    cmd: |
+      docker compose logs -f aws-app-config-agent | grep "verified latest data"
+  app_config:json:
+    cmd: |
+      curl "http://localhost:2772/applications/poc_app/environments/dev/configurations/main_json"
+  app_config:json:featureB:
+    cmd: |
+      curl "http://localhost:2772/applications/poc_app/environments/dev/configurations/main_json?flag=featureB"
+  app_config:json:featureC:
+    cmd: |
+      curl "http://localhost:2772/applications/poc_app/environments/dev/configurations/main_json?flag=featureC"
+  app_config:yaml:
+    cmd: |
+      curl "http://localhost:2772/applications/poc_app/environments/dev/configurations/main_yaml"
+  app_config:yaml:featureB:
+    cmd: |
+      curl "http://localhost:2772/applications/poc_app/environments/dev/configurations/main_yaml?flag=featureB"
+  app_config:yaml:featureC:
+    cmd: |
+      curl "http://localhost:2772/applications/poc_app/environments/dev/configurations/main_yaml?flag=featureC"
+      

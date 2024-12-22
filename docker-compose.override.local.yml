@@ -1,0 +1,11 @@
+services:
+  app:
+    environment:
+      AWS_APP_CONFIG_APPLICATION_ID: poc_app
+      AWS_APP_CONFIG_ENVIRONMENT_ID: dev
+      AWS_APP_CONFIG_CONFIGURATION_ID: main_json
+  aws-app-config-agent:
+    environment:
+      LOG_LEVEL: debug
+      POLL_INTERVAL: 1
+      LOCAL_DEVELOPMENT_DIRECTORY: /tmp/aws_app_config

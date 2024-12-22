@@ -1,0 +1,17 @@
+services:
+  app:
+    environment:
+      AWS_APP_CONFIG_APPLICATION_ID: ${AWS_APP_CONFIG_APPLICATION_ID}
+      AWS_APP_CONFIG_ENVIRONMENT_ID: ${AWS_APP_CONFIG_ENVIRONMENT_ID}
+      AWS_APP_CONFIG_CONFIGURATION_ID: ${AWS_APP_CONFIG_CONFIGURATION_ID}
+    ports:
+      - 8080:8080
+  aws-app-config-agent:
+    environment:
+      POLL_INTERVAL: 10
+      AWS_REGION: ${AWS_REGION:-ap-northeast-1}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_PROFILE: ${AWS_PROFILE}
+    volumes:
+      - ~/.aws:/root/.aws:ro

@@ -1,0 +1,5 @@
+featureA:
+  enabled: true
+featureB:
+  enabled: false
+featureC: true
