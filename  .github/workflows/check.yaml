@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - develop/*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: corretto
+          java-version: 21
+          cache: gradle
+
+      - name: Test
+        run: ./gradlew test
