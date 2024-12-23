@@ -25,6 +25,9 @@ jobs:
           java-version: 21
           cache: gradle
 
+      - name: Build
+        run: ./gradlew testClasses
+
       - name: Test
         run: ./gradlew test
 
