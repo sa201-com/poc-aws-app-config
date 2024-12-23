@@ -9,6 +9,11 @@ on:
       - develop/*
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 jobs:
   build:
 
